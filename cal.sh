@@ -1,8 +1,9 @@
 #!/bin/bash
 
 menu=$1 
-txt1=`cat num1.txt`
-txt2=`cat num2.txt`
+declare -a num
+num=(`cat num1.txt` `cat num2.txt`) 
+
 if [ -z $menu ]
 then
     echo "...none operator parameter...."
@@ -16,16 +17,16 @@ fi
  
 case $menu in 
   1) op="add"
-     result=`expr $txt1 + $txt2` ;; 
+     result=`expr ${num[0]} + ${num[1]}` ;; 
   2) op="sub"
-     result=`expr $txt1 - $txt2` ;; 
+     result=`expr ${num[0]} - ${num[1]}` ;; 
   3) op="div"
-     result=`expr $txt1 / $txt2` ;;
+     result=`expr ${num[0]} / ${num[1]}` ;;
   4) op="mul"
-     result=`expr $txt1 \* $txt2` ;;
+     result=`expr ${num[0]} \* ${num[1]}` ;;
 esac
 
-echo "num1:$txt1"
-echo "num2:$txt2"
+echo "num1:${num[0]}"
+echo "num2:${num[1]}"
 echo "op:$op"
 echo "result:$result"
